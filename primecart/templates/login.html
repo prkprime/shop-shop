@@ -2,11 +2,15 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>register</title>
+    <title>login</title>
+
+    <link href="{{ url_for(endpoint='static', filename='css/login.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
   </head>
   <body>
     <div class="registration_form">
-      <form class="" action="login.html" method="post">
+      <form class="login" action="/login" method="post">
         <p><input type="text" name="username" value="" placeholder="Username" required></p>
         <p><input type="password" name="password" value="" placeholder="Password" required></p>
         <p><input type="submit" name="submit" value="Submit"></p>

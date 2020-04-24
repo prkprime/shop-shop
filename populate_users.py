@@ -10,11 +10,12 @@ def main():
     # Ask for data to store
     user = input('Enter your username: ')
     password = input('Enter your password: ')
+    user_type = input('Enter user type (customer/admin) : ')
     pass_hash = generate_password_hash(password, method='pbkdf2:sha256')
 
     # Insert the user in the DB
     try:
-        collection.insert({"_id": user, "password": pass_hash})
+        collection.insert_one({"_id": user, "password": pass_hash, "user_type" : user_type})
         print('User created')
     except DuplicateKeyError:
         print('User already present in DB')
