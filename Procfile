@@ -1,1 +1,1 @@
-worker: python3 -m primecart
+web: gunicorn primecart:app
