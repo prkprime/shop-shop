@@ -1,0 +1,13 @@
+.registration_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+}
+
+.header {
+  flex-direction: column;
+  text-align: right;
+}
