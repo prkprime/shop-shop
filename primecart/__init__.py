@@ -42,7 +42,7 @@ def login():
             login_user(user_object)
             next = request.args.get('next')
             print("Logged in successfully!")
-            if current_user.get_type() == 'admin':
+            if current_user.get_type().lower() == 'admin':
                 return redirect(url_for('admin'))
             return redirect(next or url_for('index'))
         print("Wrong username or password!")
