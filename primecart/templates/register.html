@@ -28,7 +28,10 @@
       <form class="card-body" action="/register" method="post">
         <p><input class="form-control" type="text" name="username" value="" placeholder="Username" required></p>
         <p><input class="form-control" type="password" name="password" value="" placeholder="Password" required></p>
-        <p><input class="form-control" type="text" name="user_type" value="" placeholder="User Type (admin/customer)"></p>
+        <p><select class="form-control" type="text" name="user_type" >
+          <option value="user" selected>User</option>
+          <option value="admin">Admin</option>
+        </select></p>
         <p><input class="btn btn-primary" type="submit" name="submit" value="Submit"></p>
       </form>
     </div>
