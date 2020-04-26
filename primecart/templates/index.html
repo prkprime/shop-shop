@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
     <title>Prime Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for(endpoint='static', filename='css/index.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
+
   <body>
-    <div class="container">
-      <div class="Content">
-        <a href="/logout"> Log Out</a>
+
+    <header>
+      <div class="navbar shadow ">
+        <a href="/" class="navbar-brand text-dark">PrimeCart</a>
+        <div class="navbar-nav d-flex flex-row">
+          <a href="/logout" class="text-dark">Logout</a>
+        </div>
       </div>
+    </header>
+
+    <div class="container mt-5">
+      Index Page
     </div>
+
   </body>
 </html>
