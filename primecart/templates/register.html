@@ -7,7 +7,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
   <link href="{{ url_for(endpoint='static', filename='css/registration.css') }}" rel="stylesheet">
   <meta name="viewport" content="width=device-width,height=device-height initial-scale=1" />
-
 </head>
 
 <body>
@@ -15,27 +14,25 @@
     <div class="navbar shadow ">
       <a href="/" class="navbar-brand text-dark">PrimeCart</a>
       <div class="navbar-nav d-flex flex-row">
-
         <a href="/login" class="nav-link text-dark">Login</a>
-
       </div>
     </div>
   </header>
+
   <div class="container text-center mt-5">
     <div class="card mx-auto justify-content-center shadow" style="width: 18rem;">
-
 
       <form class="card-body" action="/register" method="post">
         <p><input class="form-control" type="text" name="username" value="" placeholder="Username" required></p>
         <p><input class="form-control" type="password" name="password" value="" placeholder="Password" required></p>
         <p><select class="form-control" type="text" name="user_type" >
-          <option value="user" selected>User</option>
+          <option value="user" selected>Customer</option>
           <option value="admin">Admin</option>
         </select></p>
         <p><input class="btn btn-primary" type="submit" name="submit" value="Submit"></p>
       </form>
+      
     </div>
   </div>
 </body>
-
 </html>
