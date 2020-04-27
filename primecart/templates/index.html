@@ -20,8 +20,14 @@
       </div>
     </header>
 
-    <div class="container mt-5">
-      Index Page
+    <div class="container">
+      {%for i in products%}
+      <div class="product">
+        {{i['ProductName']}}
+        -
+        {{i['Price']}}
+      </div>
+      {%endfor%}
     </div>
 
   </body>

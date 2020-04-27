@@ -24,7 +24,8 @@ def load_user(username):
 @app.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    products = list(app.config['PRODUCT_COLLECTION'].aggregate([{'$sample' : {'size': 5}}]));
+    return render_template('index.html', n = len(products), products=products)
 
 
 @app.route('/admin')
