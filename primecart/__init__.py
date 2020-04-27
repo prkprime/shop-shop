@@ -15,10 +15,10 @@ loginmanager.login_view = 'login'
 
 @loginmanager.user_loader
 def load_user(username):
-    u = app.config['USERS_COLLECTION'].find_one({"_id": username})
+    u = app.config['USERS_COLLECTION'].find_one({"CustomerName": username})
     if not u:
         return None
-    return User(u['_id'], u['user_type'])
+    return User(u['CustomerName'], u['CustomerType'])
 
 
 @app.route('/')
@@ -36,16 +36,16 @@ def admin():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = app.config['USERS_COLLECTION'].find_one({'_id': request.form['username']})
-        if user and User.validate_login(user['password'], request.form['password']):
-            user_object = User(user['_id'], user['user_type'])
+        user = app.config['USERS_COLLECTION'].find_one({'CustomerName': request.form['username']})
+        if user and User.validate_login(user['CustomerPassword'], request.form['password']):
+            user_object = User(user['CustomerName'], user['CustomerType'])
             login_user(user_object)
             next = request.args.get('next')
-            print("Logged in successfully!")
+            print(f'{current_user.get_id()} Logged in successfully!')
             if current_user.get_type().lower() == 'admin':
                 return redirect(url_for('admin'))
             return redirect(next or url_for('index'))
-        print("Wrong username or password!")
+        print('Wrong username or password!')
     return render_template('login.html')
 
 
@@ -61,9 +61,9 @@ def register():
         username = request.form['username']
         password = request.form['password']
         user_type = request.form['user_type']
-        pass_hash = generate_password_hash(password, method='pbkdf2:sha256')
         try:
-            app.config['USERS_COLLECTION'].insert_one({'_id': username, 'password': pass_hash, 'user_type': user_type})
+            maxid = app.config['USERS_COLLECTION'].find().sort([('CustomerId',-1)]).limit(1)
+            app.config['USERS_COLLECTION'].insert_one({'CustomerId' : int(maxid[0]['CustomerId'])+1, 'CustomerName': username, 'CustomerPassword': password, 'CustomerType': user_type})
             print('User created successfully')
             return redirect(url_for('login'))
         except DuplicateKeyError:
