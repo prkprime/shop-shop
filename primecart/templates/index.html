@@ -20,12 +20,14 @@
       </div>
     </header>
 
-    <div class="container">
+    <div class="card-columns">
       {%for i in products%}
-      <div class="product">
-        {{i['ProductName']}}
-        -
-        {{i['Price']}}
+      <div class="card">
+        <div class="card-body">
+          <h5>{{i['ProductName']}}</h5>
+          <p>{{i['Price']}}</p>
+          <input type="submit" class="btn btn-primary" name="add_to_cart" value="Add to Cart">
+        </div>
       </div>
       {%endfor%}
     </div>
