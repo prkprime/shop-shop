@@ -1,3 +1,14 @@
 html, body{
   min-height: 100vh;
 }
+
+.container,.row {
+  height:90vh
+}
+
+  @media screen  and (min-width:768px) {
+   .container,.row {
+   height:75vh
+  }
+ } 
+
