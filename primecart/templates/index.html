@@ -21,16 +21,14 @@
     </header>
 
 
-    <div class="container ml-0 pl-0" >
+    <div class="container" >
       <div class="row" style="min-height:90vh">
-        <div class="col-sm-3 h-100 mynav card d-none d-sm-flex">
-          <div class="card-body"></div>
-        </div>
-      <div class="col-sm-9 card-columns mt-4 align-items-center">
+
+      <div class="col-12 card-columns mt-4">
       {%for i in products%}
       <div class="card item">
         <div>
-        <div class="card-body overflow-hidden align-self-stretch" style="height:145px">
+        <div class="card-body overflow-hidden " style="height:145px">
           <h5>{{i['ProductName']}}</h5>
           <p>{{i['Price']}}</p>
         </div>
