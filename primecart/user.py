@@ -14,13 +14,13 @@ class User():
     def is_anonymous(self):
         return False
 
-    def get_username(self):
+    def get_id(self):
         return self.username
 
     def get_type(self):
         return self.user_type
 
-    def get_id(self):
+    def get_int_id(self):
         return self.user_id
 
     @staticmethod
