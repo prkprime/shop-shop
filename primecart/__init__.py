@@ -51,7 +51,7 @@ def login():
     if request.method == 'POST':
         user = app.config['USERS_COLLECTION'].find_one({'CustomerName': request.form['username']})
         if user and User.validate_login(user['CustomerPassword'], request.form['password']):
-            user_object = User(user['CustomerName'], user['CustomerType'])
+            user_object = User(user['CustomerName'], user['CustomerType'], user['CustomerId'])
             login_user(user_object)
             next = request.args.get('next')
             print(f'{current_user.get_username()} Logged in successfully!')
