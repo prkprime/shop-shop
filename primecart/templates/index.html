@@ -23,18 +23,42 @@
 
     <div class="container" >
       <div class="row" style="min-height:90vh">
-
+      <div class="col-12 card-columns mt-4">
+        {%for j in suggested_products%}
+        <div class="card item">
+          <div>
+            <form class="" action="/index/add_to_cart" method="post">
+            <div class="card-body overflow-hidden " style="height:145px">
+              <h5>{{j['ProductName']}}</h5>
+              <p>{{j['Price']}}</p>
+              <input type="hidden" name="id" value="{{j['ProductId']}}">
+            </div>
+            <div class="card-footer">
+              <input type="submit" class="btn btn-primary btn-sm" name="add_to_cart" value="submit">
+            </div>
+            </form>
+        </div>
+        </div>
+        {%endfor%}
+      </div>
       <div class="col-12 card-columns mt-4">
       {%for i in products%}
       <div class="card item">
         <div>
-        <div class="card-body overflow-hidden " style="height:145px">
-          <h5>{{i['ProductName']}}</h5>
-          <p>{{i['Price']}}</p>
-        </div>
-        <div class="card-footer">
-          <input type="submit" class="btn btn-primary btn-sm" name="add_to_cart" value="Add to Cart">
-        </div>
+          <form class="" action="/index/add_to_cart" method="post">
+          <div class="card-body overflow-hidden " style="height:145px">
+            <h5>{{i['ProductName']}}</h5>
+            <p>{{i['Price']}}</p>
+            <input type="hidden" name="id" value="{{i['ProductId']}}">
+          </div>
+          <div class="card-footer">
+            {%if i['ProductId'] in cart_items_list_str%}
+              <input type="submit" class="btn btn-primary btn-sm" name="add_to_cart" value="submit" disabled>
+            {%else%}
+              <input type="submit" class="btn btn-primary btn-sm" name="add_to_cart" value="submit">
+            {%endif%}
+          </div>
+          </form>
       </div>
       </div>
       {%endfor%}
