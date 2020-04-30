@@ -5,13 +5,13 @@ from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash
 from pymongo.errors import DuplicateKeyError
 from primecart.user import User
+from primecart.parse_association_rules import new_rules, suggestions
 
 app = Flask(__name__)
 app.config.from_object('config')
 loginmanager = LoginManager()
 loginmanager.init_app(app)
 loginmanager.login_view = 'login'
-
 
 @loginmanager.user_loader
 def load_user(username):
@@ -70,3 +70,7 @@ def register():
         except DuplicateKeyError:
             print('User already exists')
     return render_template('register.html')
+
+@app.route('/suggestions')
+def get_suggestions():
+    return(suggestions([1175, 1597, 29, 2957, 342], new_rules))

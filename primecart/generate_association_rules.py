@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import pyfpgrowth
 import time
+import pickle
 
 def get_transactions():
     print('retriving transactions from database')
@@ -31,18 +32,23 @@ def get_transactions():
                 pass
         if len(single_transaction) != 0:
             transaction2.append(single_transaction)
-    print(transaction2[0])
-    print(type(transaction2[0][0]))
     print(f'transactions retrived. (time taken : {round(time.time()-start_time, 4)} seconds)')
     return transaction
 
 def get_rules(transactions):
     print('generating patterns...')
-    patterns = pyfpgrowth.find_frequent_patterns(transactions, 40)
-    print('patterns generated')
+    start_time = time.time()
+    patterns = pyfpgrowth.find_frequent_patterns(transactions, 400)
+    print(f'patterns generated (time taken : {round(time.time()-start_time, 4)} seconds)')
     print('generating rules...')
-    return pyfpgrowth.generate_association_rules(patterns, 0.7)
-    print('rules generated...')
+    start_time = time.time()
+    rules = pyfpgrowth.generate_association_rules(patterns, 0.7)
+    print(f'rules generated (time taken : {round(time.time()-start_time, 4)} seconds)')
+    return rules
 
-with open('rules.txt', 'w') as f:
-    f.write(str(get_rules(get_transactions())))
+rules = get_rules(get_transactions())
+print('dumping rules to rules.pickle...')
+start_time = time.time()
+with open('rules.pickle', 'wb') as handle:
+    pickle.dump(rules, handle, protocol=pickle.HIGHEST_PROTOCOL)
+print(f'rules saved in rules.pickle (time taken : {round(time.time()-start_time, 4)} seconds)')
