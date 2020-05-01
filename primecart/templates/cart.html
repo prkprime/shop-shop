@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for(endpoint='static', filename='css/cart.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar shadow ">
+        <a href="/" class="navbar-brand text-dark">PrimeCart</a>
+        <div class="navbar-nav d-flex flex-row">
+          <div class="" style="padding-right: 10px">
+            <a href="/view_cart/check_out" class="text-dark">Check Out</a>
+          </div>
+          <div class="" style="padding-right: 10px">
+            <a href="/view_cart/empty_cart" class="text-dark">Empty Cart</a>
+          </div>
+          <div class="">
+            <a href="/logout" class="text-dark">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row" style="min-height:90vh">
+        <div class="col-12 card-columns mt-4">
+          {%for i in cart_products.keys()%}
+          <div class="card item">
+            <div>
+              <form class="" action="/view_cart/remove_product" method="post">
+                <div class="card-body">
+                  <p>ProductName : {{cart_products[i]['ProductName']}}</p>
+                  <p>Quantity : {{i}}</p>
+                </div>
+                <div class="card-footer">
+                  <input type="hidden" name="product_id" value="{{cart_products[i]['ProductId']}}">
+                  <input type="submit" class="btn btn-secondary btn-sm" name="submit" value="Remove Product">
+                </div>
+              </form>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

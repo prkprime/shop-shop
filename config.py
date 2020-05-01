@@ -12,7 +12,13 @@ DATABASE = MongoClient('mongodb+srv://prkprime:prkaly007@primecart-uvg6p.gcp.mon
 
 USERS_COLLECTION = DATABASE.Users
 PRODUCT_COLLECTION = DATABASE.ProductData
+
+#actual data
 PURCHASE_COLLECTION = DATABASE.PurchaseData
+#this for checkout purpose
+PURCHASE_COLLECTION2 = DATABASE.TempPurchaseData
+
+
 CARTS_COLLECTION = DATABASE.Carts
 
 DEBUG = True
