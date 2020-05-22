@@ -3,6 +3,7 @@ import pyfpgrowth
 import time
 import pickle
 
+
 def get_transactions():
     print('retriving transactions from database')
     start_time = time.time()
@@ -15,8 +16,7 @@ def get_transactions():
             single_transaction.append(i['ProductId'])
             transaction_dict[i['InvoiceId']] = single_transaction
         else:
-            single_transaction = []
-            single_transaction.append(i['ProductId'])
+            single_transaction = [i['ProductId']]
             transaction_dict[i['InvoiceId']] = single_transaction
     transaction = list(transaction_dict.values())
     transaction2 = []
@@ -32,23 +32,25 @@ def get_transactions():
                 pass
         if len(single_transaction) != 0:
             transaction2.append(single_transaction)
-    print(f'transactions retrived. (time taken : {round(time.time()-start_time, 4)} seconds)')
+    print(f'transactions retrieved. (time taken : {round(time.time() - start_time, 4)} seconds)')
     return transaction
+
 
 def get_rules(transactions):
     print('generating patterns...')
     start_time = time.time()
     patterns = pyfpgrowth.find_frequent_patterns(transactions, 400)
-    print(f'patterns generated (time taken : {round(time.time()-start_time, 4)} seconds)')
+    print(f'patterns generated (time taken : {round(time.time() - start_time, 4)} seconds)')
     print('generating rules...')
     start_time = time.time()
     rules = pyfpgrowth.generate_association_rules(patterns, 0.7)
-    print(f'rules generated (time taken : {round(time.time()-start_time, 4)} seconds)')
+    print(f'rules generated (time taken : {round(time.time() - start_time, 4)} seconds)')
     return rules
+
 
 rules = get_rules(get_transactions())
 print('dumping rules to rules.pickle...')
 start_time = time.time()
 with open('rules.pickle', 'wb') as handle:
     pickle.dump(rules, handle, protocol=pickle.HIGHEST_PROTOCOL)
-print(f'rules saved in rules.pickle (time taken : {round(time.time()-start_time, 4)} seconds)')
+print(f'rules saved in rules.pickle (time taken : {round(time.time() - start_time, 4)} seconds)')
