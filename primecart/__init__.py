@@ -49,7 +49,8 @@ def index():
 @login_required
 def admin():
     if current_user.get_type().lower() == 'admin':
-        return render_template('admin.html')
+        #return render_template('admin.html')
+        return redirect("https://datastudio.google.com/embed/reporting/2eb5bb18-f630-4948-89b7-fb3dc23a3c5f/page/nHKRB")
     else:
         return 'What are you thinking? you are not an admin'
 
